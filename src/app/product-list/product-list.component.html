@@ -6,3 +6,32 @@ Copyright Google LLC. All Rights Reserved.
 Use of this source code is governed by an MIT-style license that
 can be found in the LICENSE file at http://angular.io/license
 -->
+
+<!-- *NgFor will itterate over a list. In this example we are itterative over a list of products. -->
+<!-- * denotes a structual directive. -->
+
+<!-- We use string interpolation, much like we have done in previous C# examples and in my personal python code. It all uses the same syntax style {}. With Angular we use {{}} rather than a single set of curley braces. -->
+
+<div *ngFor="let product of products">
+  <h3>
+    <!-- We do property binding with square braces. Property binding assigns the the value to the target element. It is worth noting this is one way only. This means you can't involk a method on the title for example to retrieve the product name + details. More info here: https://angular.io/guide/property-binding -->
+
+    <a [title] ="product.name + ' details'">
+      {{product.name}}
+    </a>
+  </h3>
+<!-- Okay, I initially made a mistake here the *ngIf is case sensitive. Please next time type it as below. Basically, we are saying if there is a product desciption render the paragraph. If not do nothing. A pretty nifty if statement. -->
+  <p *ngIf="product.description">
+    Description: {{product.description}}
+  </p>
+  <!-- We are creating a button below, and we want it to do something when we click it. We want to involk the share event when the button is clicked. Below we use event binding with the parenthesis around the word click, this tells us when the button is clicked do : share(). Share can be found in product-list.component.ts -->
+<button (click)="share()">
+  Share
+</button>
+
+<app-product-alerts [product] = "product"
+(notify)="onNotify()"></app-product-alerts>
+</div>
+
+
+<!-- Nice. We learned some cool basic template syntax. When im ready to dive deeper into template syntax I should check out: https://angular.io/guide/architecture-components#template-syntax  -->
